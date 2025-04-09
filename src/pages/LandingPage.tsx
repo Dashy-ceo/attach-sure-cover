@@ -23,10 +23,10 @@ const LandingPage = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Button asChild size="lg" className="bg-white text-primary hover:bg-blue-50">
-                  <Link to="/dashboard">Find a Plan</Link>
+                  <Link to="/browse-plans">Find a Plan</Link>
                 </Button>
                 <Button variant="outline" size="lg" className="text-white border-white hover:bg-white/10">
-                  <Link to="/">Learn More</Link>
+                  <Link to="/about">Learn More</Link>
                 </Button>
               </div>
             </div>
@@ -158,7 +158,7 @@ const LandingPage = () => {
             Find the perfect insurance plan for your attachment or internship today.
           </p>
           <Button asChild size="lg" className="bg-white text-primary hover:bg-blue-50">
-            <Link to="/dashboard">Find a Plan Now</Link>
+            <Link to="/browse-plans">Find a Plan Now</Link>
           </Button>
         </div>
       </section>

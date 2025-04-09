@@ -41,8 +41,8 @@ const Footer = () => {
             <h3 className="font-medium text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li><Link to="/" className="text-gray-600 hover:text-primary transition-colors">Home</Link></li>
-              <li><Link to="/" className="text-gray-600 hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link to="/" className="text-gray-600 hover:text-primary transition-colors">How It Works</Link></li>
+              <li><Link to="/about" className="text-gray-600 hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link to="/how-it-works" className="text-gray-600 hover:text-primary transition-colors">How It Works</Link></li>
               <li><Link to="/browse-plans" className="text-gray-600 hover:text-primary transition-colors">Browse Plans</Link></li>
             </ul>
           </div>
@@ -50,10 +50,10 @@ const Footer = () => {
           <div>
             <h3 className="font-medium text-lg mb-4">Support</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/" className="text-gray-600 hover:text-primary transition-colors">FAQs</Link></li>
-              <li><Link to="/" className="text-gray-600 hover:text-primary transition-colors">Contact Us</Link></li>
-              <li><Link to="/" className="text-gray-600 hover:text-primary transition-colors">Terms of Service</Link></li>
-              <li><Link to="/" className="text-gray-600 hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/faqs" className="text-gray-600 hover:text-primary transition-colors">FAQs</Link></li>
+              <li><Link to="/contact" className="text-gray-600 hover:text-primary transition-colors">Contact Us</Link></li>
+              <li><Link to="/terms" className="text-gray-600 hover:text-primary transition-colors">Terms of Service</Link></li>
+              <li><Link to="/privacy" className="text-gray-600 hover:text-primary transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
           

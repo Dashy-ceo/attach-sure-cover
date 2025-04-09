@@ -14,6 +14,14 @@ import NotFound from "./pages/NotFound";
 import AuthLayout from "./components/layout/AuthLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Index from "./pages/Index";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import About from "./pages/About";
+import HowItWorks from "./pages/HowItWorks";
+import FAQs from "./pages/FAQs";
+import ContactUs from "./pages/ContactUs";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +35,14 @@ const App = () => (
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/home" element={<Index />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/faqs" element={<FAQs />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             
             {/* Protected routes */}
             <Route element={<ProtectedRoute />}>

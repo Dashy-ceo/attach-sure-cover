@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -22,6 +21,8 @@ import FAQs from "./pages/FAQs";
 import ContactUs from "./pages/ContactUs";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import AdminLogin from "./pages/admin/AdminLogin";
+import Dashboard from "./pages/admin/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,13 @@ const App = () => (
                 <Route path="/application/:planId" element={<ApplicationForm />} />
                 <Route path="/success" element={<SuccessPage />} />
               </Route>
+            </Route>
+            
+            {/* Admin routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/*" element={<ProtectedRoute />}>
+              <Route path="dashboard" element={<Dashboard />} />
+              {/* More admin routes will be added here */}
             </Route>
             
             <Route path="*" element={<NotFound />} />

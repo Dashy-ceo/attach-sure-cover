@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -5,7 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
-import Dashboard from "./pages/Dashboard";
+import UserDashboard from "./pages/Dashboard";
 import BrowsePlans from "./pages/BrowsePlans";
 import ApplicationForm from "./pages/ApplicationForm";
 import SuccessPage from "./pages/SuccessPage";
@@ -22,7 +23,7 @@ import ContactUs from "./pages/ContactUs";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AdminLogin from "./pages/admin/AdminLogin";
-import Dashboard from "./pages/admin/Dashboard";
+import AdminDashboard from "./pages/admin/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -48,7 +49,7 @@ const App = () => (
             {/* Protected routes */}
             <Route element={<ProtectedRoute />}>
               <Route element={<AuthLayout />}>
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard" element={<UserDashboard />} />
                 <Route path="/browse-plans" element={<BrowsePlans />} />
                 <Route path="/application/:planId" element={<ApplicationForm />} />
                 <Route path="/success" element={<SuccessPage />} />
@@ -58,7 +59,7 @@ const App = () => (
             {/* Admin routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/*" element={<ProtectedRoute />}>
-              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
               {/* More admin routes will be added here */}
             </Route>
             
@@ -71,3 +72,4 @@ const App = () => (
 );
 
 export default App;
+

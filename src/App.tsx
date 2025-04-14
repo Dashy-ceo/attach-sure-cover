@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -24,6 +23,9 @@ import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/Dashboard";
+import Policies from "./pages/admin/Policies";
+import ExpiringPolicies from "./pages/admin/ExpiringPolicies";
+import Payments from "./pages/admin/Payments";
 
 // Initialize QueryClient inside the component to prevent issues with React hooks
 const App = () => {
@@ -62,7 +64,9 @@ const App = () => {
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/*" element={<ProtectedRoute />}>
               <Route path="dashboard" element={<AdminDashboard />} />
-              {/* More admin routes will be added here */}
+              <Route path="policies" element={<Policies />} />
+              <Route path="expiring" element={<ExpiringPolicies />} />
+              <Route path="payments" element={<Payments />} />
             </Route>
             
             <Route path="*" element={<NotFound />} />

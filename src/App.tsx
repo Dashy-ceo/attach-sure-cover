@@ -25,10 +25,12 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/Dashboard";
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <React.StrictMode>
+// Initialize QueryClient inside the component to prevent issues with React hooks
+const App = () => {
+  // Create a new QueryClient instance inside the component
+  const queryClient = new QueryClient();
+  
+  return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
@@ -68,8 +70,7 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
-  </React.StrictMode>
-);
+  );
+};
 
 export default App;
-

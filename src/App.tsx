@@ -26,6 +26,7 @@ import AdminDashboard from "./pages/admin/Dashboard";
 import Policies from "./pages/admin/Policies";
 import ExpiringPolicies from "./pages/admin/ExpiringPolicies";
 import Payments from "./pages/admin/Payments";
+import Claims from "./pages/Claims";
 
 // Initialize QueryClient inside the component to prevent issues with React hooks
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
             {/* Protected routes */}
             <Route element={<ProtectedRoute />}>
               <Route element={<AuthLayout />}>
+                <Route path="/claims" element={<Claims />} />
                 <Route path="/dashboard" element={<UserDashboard />} />
                 <Route path="/browse-plans" element={<BrowsePlans />} />
                 <Route path="/application/:planId" element={<ApplicationForm />} />

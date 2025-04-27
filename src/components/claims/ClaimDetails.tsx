@@ -1,7 +1,15 @@
 
 import React from "react";
-import { Label } from "@/components/ui/label";
+import { UseFormReturn } from "react-hook-form";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -10,90 +18,107 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { User, CalendarDays, Shield } from "lucide-react";
+import type { ClaimFormValues } from "@/lib/validations/claim";
 
 interface ClaimDetailsProps {
-  formData: {
-    fullName: string;
-    policyNumber: string;
-    incidentDate: string;
-    incidentType: string;
-  };
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSelectChange: (value: string) => void;
+  form: UseFormReturn<ClaimFormValues>;
 }
 
-export const ClaimDetails: React.FC<ClaimDetailsProps> = ({
-  formData,
-  handleInputChange,
-  handleSelectChange,
-}) => {
+export const ClaimDetails: React.FC<ClaimDetailsProps> = ({ form }) => {
   return (
-    <>
-      <div className="space-y-2">
-        <Label htmlFor="fullName">Full Name</Label>
-        <div className="relative">
-          <User className="absolute left-3 top-2.5 h-4 w-4 text-gray-500" />
-          <Input
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            className="pl-9"
-            placeholder="Enter your full name"
-            required
-          />
-        </div>
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <FormField
+        control={form.control}
+        name="fullName"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Full Name</FormLabel>
+            <FormControl>
+              <div className="relative">
+                <User className="absolute left-3 top-2.5 h-4 w-4 text-gray-500" />
+                <Input className="pl-9" placeholder="Enter your full name" {...field} />
+              </div>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-      <div className="space-y-2">
-        <Label htmlFor="policyNumber">Policy Number</Label>
-        <div className="relative">
-          <Shield className="absolute left-3 top-2.5 h-4 w-4 text-gray-500" />
-          <Input
-            id="policyNumber"
-            name="policyNumber"
-            value={formData.policyNumber}
-            onChange={handleInputChange}
-            className="pl-9"
-            placeholder="Enter your policy number"
-            required
-          />
-        </div>
-      </div>
+      <FormField
+        control={form.control}
+        name="policyNumber"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Policy Number</FormLabel>
+            <FormControl>
+              <div className="relative">
+                <Shield className="absolute left-3 top-2.5 h-4 w-4 text-gray-500" />
+                <Input className="pl-9" placeholder="Enter your policy number" {...field} />
+              </div>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-      <div className="space-y-2">
-        <Label htmlFor="incidentDate">Date of Incident</Label>
-        <div className="relative">
-          <CalendarDays className="absolute left-3 top-2.5 h-4 w-4 text-gray-500" />
-          <Input
-            id="incidentDate"
-            name="incidentDate"
-            type="date"
-            value={formData.incidentDate}
-            onChange={handleInputChange}
-            className="pl-9"
-            required
-          />
-        </div>
-      </div>
+      <FormField
+        control={form.control}
+        name="incidentDate"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Date of Incident</FormLabel>
+            <FormControl>
+              <div className="relative">
+                <CalendarDays className="absolute left-3 top-2.5 h-4 w-4 text-gray-500" />
+                <Input type="date" className="pl-9" {...field} />
+              </div>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-      <div className="space-y-2">
-        <Label htmlFor="incidentType">Type of Incident</Label>
-        <Select
-          value={formData.incidentType}
-          onValueChange={handleSelectChange}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Select incident type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="accident">Accident</SelectItem>
-            <SelectItem value="theft">Theft</SelectItem>
-            <SelectItem value="damage">Damage</SelectItem>
-            <SelectItem value="other">Other</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </>
+      <FormField
+        control={form.control}
+        name="incidentType"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Type of Incident</FormLabel>
+            <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <FormControl>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select incident type" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                <SelectItem value="accident">Accident</SelectItem>
+                <SelectItem value="theft">Theft</SelectItem>
+                <SelectItem value="damage">Damage</SelectItem>
+                <SelectItem value="other">Other</SelectItem>
+              </SelectContent>
+            </Select>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
+        name="description"
+        render={({ field }) => (
+          <FormItem className="col-span-2">
+            <FormLabel>Description of Incident</FormLabel>
+            <FormControl>
+              <Textarea
+                placeholder="Please provide details about what happened..."
+                className="min-h-[120px]"
+                {...field}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    </div>
   );
 };

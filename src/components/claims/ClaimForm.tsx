@@ -1,47 +1,33 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { User, CalendarDays, FileUp, Check, Shield } from "lucide-react";
+import { Form } from "@/components/ui/form";
+import { FileUp } from "lucide-react";
 import { FileUploadSection } from "./FileUploadSection";
 import { ClaimDetails } from "./ClaimDetails";
+import { claimFormSchema, type ClaimFormValues } from "@/lib/validations/claim";
 
 export const ClaimForm = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileUploaded, setFileUploaded] = useState(false);
-  
-  const [formData, setFormData] = useState({
-    fullName: "",
-    policyNumber: "",
-    incidentDate: "",
-    incidentType: "",
-    description: "",
+
+  const form = useForm<ClaimFormValues>({
+    resolver: zodResolver(claimFormSchema),
+    defaultValues: {
+      fullName: "",
+      policyNumber: "",
+      incidentDate: "",
+      incidentType: "",
+      description: "",
+    },
   });
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSelectChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, incidentType: value }));
-  };
 
   const handleFileUpload = () => {
     setFileUploaded(true);
@@ -51,8 +37,7 @@ export const ClaimForm = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: ClaimFormValues) => {
     setIsSubmitting(true);
 
     setTimeout(() => {
@@ -78,41 +63,24 @@ export const ClaimForm = () => {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <ClaimDetails
-              formData={formData}
-              handleInputChange={handleInputChange}
-              handleSelectChange={handleSelectChange}
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <ClaimDetails form={form} />
+            
+            <FileUploadSection
+              fileUploaded={fileUploaded}
+              handleFileUpload={handleFileUpload}
             />
-          </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="description">Description of Incident</Label>
-            <Textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-              placeholder="Please provide details about what happened..."
-              className="min-h-[120px]"
-              required
-            />
-          </div>
-
-          <FileUploadSection
-            fileUploaded={fileUploaded}
-            handleFileUpload={handleFileUpload}
-          />
-
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={isSubmitting || !fileUploaded}
-          >
-            {isSubmitting ? "Submitting..." : "Submit Claim"}
-          </Button>
-        </form>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={isSubmitting || !fileUploaded}
+            >
+              {isSubmitting ? "Submitting..." : "Submit Claim"}
+            </Button>
+          </form>
+        </Form>
       </CardContent>
     </Card>
   );

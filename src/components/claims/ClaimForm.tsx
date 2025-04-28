@@ -7,7 +7,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { FileUp } from "lucide-react";
 import { FileUploadSection } from "./FileUploadSection";
 import { ClaimDetails } from "./ClaimDetails";
 import { claimFormSchema, type ClaimFormValues } from "@/lib/validations/claim";
